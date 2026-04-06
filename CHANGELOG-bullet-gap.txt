@@ -1,0 +1,1 @@
+Adjusted list bullet-to-text spacing to feel a bit more open and natural.

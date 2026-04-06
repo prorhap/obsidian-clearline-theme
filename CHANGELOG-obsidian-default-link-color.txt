@@ -1,0 +1,12 @@
+Updated link colors to use the Obsidian default-theme purple more faithfully.
+
+Changes:
+- --link-color: #8B6CEF
+- --link-color-hover: #8B6CEF
+- --link-external-color: #8B6CEF
+- --link-external-color-hover: #8B6CEF
+
+Reason:
+The previous value looked paler than the default Obsidian theme purple.
+This update matches the publicly reported default-theme purple value (#8B6CEF)
+more closely.
