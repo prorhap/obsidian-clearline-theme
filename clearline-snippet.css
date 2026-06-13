@@ -52,6 +52,8 @@ Quick knobs:
   --cl-highlight: #fff2b8;
   --cl-shadow: 0 10px 30px rgba(26, 39, 68, 0.07);
   --cl-selection: rgba(77, 127, 243, 0.16);
+  --cl-danger: #d65a60;
+  --cl-danger-hover: #c64a50;
 
   --background-primary: var(--cl-surface-1);
   --background-primary-alt: var(--cl-surface-0);
@@ -117,6 +119,11 @@ Quick knobs:
   --table-border-color: var(--cl-border);
   --table-header-background: var(--cl-surface-2);
   --table-header-background-hover: #eef3fb;
+
+  --color-red: var(--cl-danger);
+  --text-error: var(--cl-danger);
+  --background-modifier-error: var(--cl-danger);
+  --background-modifier-error-hover: var(--cl-danger-hover);
 }
 
 .theme-dark {
@@ -145,6 +152,8 @@ Quick knobs:
   --cl-highlight: rgba(255, 216, 101, 0.20);
   --cl-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
   --cl-selection: rgba(120, 160, 255, 0.20);
+  --cl-danger: #e07379;
+  --cl-danger-hover: #ec828a;
 
   --background-primary: var(--cl-surface-1);
   --background-primary-alt: var(--cl-surface-0);
@@ -210,6 +219,11 @@ Quick knobs:
   --table-border-color: var(--cl-border);
   --table-header-background: var(--cl-surface-2);
   --table-header-background-hover: #212a3f;
+
+  --color-red: var(--cl-danger);
+  --text-error: var(--cl-danger);
+  --background-modifier-error: var(--cl-danger);
+  --background-modifier-error-hover: var(--cl-danger-hover);
 }
 
 body {

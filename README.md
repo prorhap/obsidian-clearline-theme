@@ -25,8 +25,8 @@ This theme aims for the following feel:
 
 ## Install option A — Full theme
 
-1. Extract this archive.
-2. Copy the `Clearline` folder into your vault's `.obsidian/themes/` directory.
+1. Create a folder named `Clearline` inside your vault's `.obsidian/themes/` directory.
+2. Copy `manifest.json`, `theme.css`, and `versions.json` from this repository into it.
 3. In Obsidian, go to `Settings → Appearance → Themes`.
 4. Select `Clearline` from the theme list.
 
