@@ -18,7 +18,7 @@ Quick knobs:
   --font-monospace-theme: "SF Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, "JetBrains Mono", monospace;
 
   --file-line-width: 860px;
-  --font-text-size: 15px;
+  --font-text-size: 14px;
   --line-height-normal: 1.65;
 
   --cl-radius: 16px;
@@ -49,6 +49,7 @@ Quick knobs:
   --cl-tag-border: #d6e2ff;
   --cl-code-bg: #f3f6fb;
   --cl-code-block: #f6f8fc;
+  --cl-code-inline-fg: #c2546b;
   --cl-highlight: #fff2b8;
   --cl-shadow: 0 10px 30px rgba(26, 39, 68, 0.07);
   --cl-selection: rgba(77, 127, 243, 0.16);
@@ -149,6 +150,7 @@ Quick knobs:
   --cl-tag-border: rgba(120, 160, 255, 0.24);
   --cl-code-bg: #111827;
   --cl-code-block: #0f1624;
+  --cl-code-inline-fg: #e9919f;
   --cl-highlight: rgba(255, 216, 101, 0.20);
   --cl-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
   --cl-selection: rgba(120, 160, 255, 0.20);
@@ -792,14 +794,15 @@ input.metadata-property-key-input:focus-visible {
 }
 
 /* Tables */
+/* No outer frame: a Notion-style borderless grid where every divider is a
+   single horizontal rule drawn the same way (a cell border-bottom). One
+   rendering path for all lines means uniform weight — the earlier 0.5px outer
+   border + per-cell mix made the bottom edge render thinner than the rest. */
 .markdown-rendered table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid var(--table-border-color);
-  border-radius: var(--cl-radius);
-  overflow: hidden;
-  background: var(--background-primary);
+  border-collapse: collapse;
+  border: none;
+  background: transparent;
 }
 
 .markdown-rendered th,
@@ -808,19 +811,17 @@ input.metadata-property-key-input:focus-visible {
   border-bottom: 1px solid var(--table-border-color);
 }
 
+/* Top hairline so the header reads as enclosed, matching the row dividers. */
+.markdown-rendered thead tr:first-child th {
+  border-top: 1px solid var(--table-border-color);
+}
+
 .markdown-rendered thead tr,
 .markdown-rendered th {
   background: var(--table-header-background);
   color: var(--text-muted);
-  font-weight: 680;
-}
-
-.markdown-rendered tbody tr:hover td {
-  background: var(--background-modifier-hover);
-}
-
-.markdown-rendered tbody tr:last-child td {
-  border-bottom: none;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 /* Callouts and quotes */
@@ -848,11 +849,24 @@ blockquote {
 /* Code */
 .markdown-rendered code,
 .cm-inline-code {
-  color: var(--code-normal);
+  color: var(--cl-code-inline-fg);
   background: var(--code-background);
   border: 1px solid var(--background-modifier-border);
-  border-radius: 8px;
-  padding: 0.12em 0.38em;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: var(--font-monospace);
+  font-size: 0.9em;
+}
+
+/* Code blocks keep the neutral body-ink color — the rose tint is only for
+   inline <code>, so fenced blocks stay readable for full snippets. */
+.markdown-rendered pre code,
+.markdown-rendered pre > code {
+  color: var(--code-normal);
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
 }
 
 .markdown-rendered pre,
