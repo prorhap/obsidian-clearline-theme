@@ -1,7 +1,8 @@
 # Clearline for Obsidian
 
-Clearline is a clean, focused Obsidian theme.  
-It focuses on **visual tone and interaction feel** — whitespace-driven layout, soft surfaces, and blue accents.
+Clearline is a light-first Obsidian theme built around one idea: **the page should yield to your writing.**
+
+Soft surfaces, restrained accents, and a whitespace-driven layout keep the interface quiet so your body text stays the hero — metadata and chrome recede instead of competing for attention.
 
 ## What's included
 
@@ -15,12 +16,12 @@ It focuses on **visual tone and interaction feel** — whitespace-driven layout,
 
 This theme aims for the following feel:
 
-- Bright canvas with a very subtle blue-gray sidebar
-- Rounded pill tags / properties / selected states
-- Soft borders and whitespace-driven layout
-- Blue active states
-- Card-like tables / callouts / search results
-- Natural system font feel on Mac
+- Content-first: properties and chrome recede so the note body leads
+- Bright, near-white canvas with a very subtle blue-gray sidebar
+- Quiet, borderless metadata — no heavy cards above your text
+- Restrained blue active states; soft purple links and value tokens
+- Soft rounded surfaces and whitespace-driven rhythm
+- Natural system-font feel on Mac (no external assets loaded)
 
 ## Install option A — Full theme
 
@@ -70,8 +71,9 @@ These are **optional**.
 ## What this theme covers
 
 - Subtle sidebar separation
-- Tag/property pills
-- Blue active state accents
+- Quiet, borderless properties with clear key → value hierarchy
+- Soft purple links and value tokens
+- Blue active-state accents
 - Cleaner, more spacious body text
 - Soft card-style tables/callouts
 

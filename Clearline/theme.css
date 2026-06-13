@@ -567,9 +567,9 @@ button.mod-cta:hover {
 }
 
 /* Properties */
-/* Notion-style borderless rows: metadata recedes below the H1 and reads as a
-   quiet caption zone driven by typographic hierarchy. No card, no key boxes,
-   no resting chrome except one faint hairline closing the block. */
+/* Borderless rows: metadata recedes below the H1 and reads as a quiet caption
+   zone driven by typographic hierarchy. No card, no key boxes, no resting
+   chrome except one faint hairline closing the block. */
 
 /* Container: strip the card. Only a quiet hairline UNDER the block separates
    it from the body, so it never competes with the title. */

@@ -2,19 +2,19 @@
 
 This document is a quick reference for why the theme was built this way.
 
-## Reference points
+## Core idea
 
-- **Minimal**: Clean base tone with reduced distractions
-- **Primary**: Subtle sidebar tinting that pushes the main workspace forward
-- **AnuPpuccin**: Fine-grained variables and broad UI coverage
-- **Things**: Mac/iOS-native-feeling pills, tags, checkboxes, and card surfaces
+**The page should yield to your writing.** Every decision is measured against
+one question: does this help the body text lead, or does it compete with it?
+When the two conflict, the interface gives way.
 
 ## Visual goals
 
 - Very bright, clean main canvas
-- Soft-toned sidebar
-- Blue active states
-- Pill-shaped tags/properties
+- Soft-toned sidebar that recedes behind the body
+- Restrained blue active states
+- Quiet, borderless metadata with clear key → value hierarchy
+- Soft purple links and value tokens
 - Outline-friendly whitespace for readability
 - Tables/callouts that surface context without heavy decoration
 
@@ -29,15 +29,16 @@ This document is a quick reference for why the theme was built this way.
 3. **Active / selected states use soft blue**
    - A clear but gentle active cue
 
-4. **Tags and properties are pills**
-   - A natural way to present info tokens in Obsidian
+4. **Properties recede instead of competing**
+   - Borderless rows, no card, faint keys against readable values — metadata
+     supports the note rather than announcing itself above it
 
-5. **Tables / callouts / search results are card-styled**
-   - To evoke visual tidiness and grouping
+5. **Tables / callouts / search results are lightly card-styled**
+   - To evoke visual tidiness and grouping without heavy chrome
 
 ## Limitations
 
-This theme is purely **style**.  
+This theme is purely **style**.
 It does not attempt to reproduce:
 
 - Semantic tagging
