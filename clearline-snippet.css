@@ -42,6 +42,8 @@ Quick knobs:
   --cl-accent-soft: rgba(77, 127, 243, 0.10);
   --cl-accent-soft-strong: rgba(77, 127, 243, 0.16);
   --cl-accent-line: rgba(77, 127, 243, 0.24);
+  --cl-link-soft: rgba(139, 108, 239, 0.12);
+  --cl-link-soft-strong: rgba(139, 108, 239, 0.18);
   --cl-tag-bg: #eef3ff;
   --cl-tag-fg: #3657ad;
   --cl-tag-border: #d6e2ff;
@@ -133,6 +135,8 @@ Quick knobs:
   --cl-accent-soft: rgba(120, 160, 255, 0.16);
   --cl-accent-soft-strong: rgba(120, 160, 255, 0.22);
   --cl-accent-line: rgba(120, 160, 255, 0.35);
+  --cl-link-soft: rgba(139, 108, 239, 0.22);
+  --cl-link-soft-strong: rgba(139, 108, 239, 0.30);
   --cl-tag-bg: rgba(120, 160, 255, 0.12);
   --cl-tag-fg: #bfd4ff;
   --cl-tag-border: rgba(120, 160, 255, 0.24);
@@ -563,40 +567,187 @@ button.mod-cta:hover {
 }
 
 /* Properties */
+/* Notion-style borderless rows: metadata recedes below the H1 and reads as a
+   quiet caption zone driven by typographic hierarchy. No card, no key boxes,
+   no resting chrome except one faint hairline closing the block. */
+
+/* Container: strip the card. Only a quiet hairline UNDER the block separates
+   it from the body, so it never competes with the title. */
 .metadata-container {
-  margin: 0 0 1.25rem;
-  padding: 10px;
-  border: 1px solid var(--background-modifier-border);
-  border-radius: var(--cl-radius);
-  background: var(--background-secondary);
+  margin: 0.9rem 0 1.1rem;
+  padding: 0 0 0.5rem;
+  border: none;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
+/* Heading: hidden — the borderless rows read as metadata on their own, so the
+   "Properties" caption is redundant noise above the body. */
 .metadata-properties-heading {
-  font-weight: 700;
-  color: var(--text-muted);
+  display: none;
 }
 
+.metadata-content {
+  border: none;
+  background: transparent;
+}
+
+/* Borderless rows with quiet rhythm and a gentle hover so edit mode still
+   feels interactive. */
 .metadata-property {
-  padding: 6px;
-  border-radius: 12px;
-  gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--cl-radius-soft);
+  background: transparent;
+  line-height: 1.25;
+  min-height: 0;
+  transition: background-color 120ms ease;
 }
 
 .metadata-property:hover {
   background: var(--background-modifier-hover);
 }
 
-.metadata-property-key,
-.metadata-property-value {
-  border-radius: 10px;
+/* KEY cell: a left column that pulls values close (fixing the empty-right
+   whitespace) while staying flexible so long keys grow instead of clipping.
+   Quieter than the value: faint + slightly smaller. */
+.metadata-property-key {
+  flex: 0 0 auto;
+  min-width: 9rem;
+  max-width: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-faint);
+  font-size: 0.9em;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
+/* Leading icon supports, never announces. */
+.metadata-property-icon {
+  color: var(--text-faint);
+  opacity: 0.7;
+}
+
+/* Neutralize the editable key "box". The generic input[type="text"] rule
+   (border + filled background, specificity 0-1-1) and its :hover (0-1-2) must
+   be beaten. The redundant selector list wins on specificity alone, and
+   !important is added as belt-and-suspenders so no future higher-specificity
+   input rule can reintroduce a border/fill in edit mode. */
+.metadata-property-key .metadata-property-key-input,
+.metadata-content .metadata-property-key-input,
+input.metadata-property-key-input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 6px;
+  color: var(--text-faint);
+  font-size: inherit;
+  font-weight: inherit;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+/* Stay flat on hover (override the generic input :hover fill + border). */
+.metadata-property-key .metadata-property-key-input:hover,
+.metadata-content .metadata-property-key-input:hover,
+input.metadata-property-key-input:hover {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--text-muted);
+}
+
+/* Tasteful, discoverable editing affordance on focus: a faint tint + slightly
+   clearer text whisper "this is editable" — still no border, so it never reads
+   as a button or field. */
+.metadata-property-key .metadata-property-key-input:focus,
+.metadata-property-key .metadata-property-key-input:focus-visible,
+.metadata-content .metadata-property-key-input:focus,
+input.metadata-property-key-input:focus,
+input.metadata-property-key-input:focus-visible {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none;
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-muted);
+}
+
+/* VALUE cell: reads as the content — normal weight & color, fills the row. */
+.metadata-property-value {
+  flex: 1 1 auto;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-normal);
+}
+
+/* Value pills: borderless and tinted from the SAME hue family as the link text
+   inside them, so the chip and its label read as one token instead of a blue
+   outline floating around purple text. No hairline, no fill/text color clash.
+   inline-flex + center alignment keeps the tinted box centered on its label
+   (baseline alignment made the fill look offset/floating). */
 .multi-select-pill,
 .metadata-property-value .multi-select-pill {
-  color: var(--tag-color);
-  background: var(--tag-background);
-  border: 1px solid var(--tag-border-color);
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  color: var(--link-color);
+  background: var(--cl-link-soft);
+  border: none;
   border-radius: var(--cl-radius-pill);
+  box-shadow: none;
+  padding: 0 0.55em;
+  font-size: 0.85em;
+  line-height: 1.25;
+}
+
+.multi-select-pill:hover,
+.metadata-property-value .multi-select-pill:hover {
+  background: var(--cl-link-soft-strong);
+}
+
+/* The link inside a pill drops its underline — the pill already signals the
+   token, so the underline only doubled the visual edge. */
+.multi-select-pill a,
+.multi-select-pill .multi-select-pill-content,
+.metadata-property-value .multi-select-pill a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* "+ Add property": quieted to faint text, transparent — but legible and fully
+   clickable; a soft tint confirms the hit target on hover. Selector is scoped
+   with .metadata-container to beat Obsidian's default
+   ".metadata-container .metadata-add-button" (specificity 0-2-0) which pins
+   padding-inline-start to --size-2-3 (6px). The default puts the "+" glyph at
+   ~6px while the property rows' leading icons start at ~10px (6px row padding +
+   the icon's own 4px :before inset), so the bare "+" looked shifted left. We
+   match that 10px so the "+" shares the icons' left edge. */
+.metadata-container .metadata-add-button {
+  margin-top: 2px;
+  padding: 3px 6px;
+  padding-inline-start: 10px;
+  border: none;
+  border-radius: var(--cl-radius-soft);
+  background: transparent;
+  color: var(--text-faint);
+  font-size: 0.85em;
+  box-shadow: none;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+.metadata-container .metadata-add-button:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
 }
 
 /* Tables */
