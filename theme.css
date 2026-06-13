@@ -574,6 +574,33 @@ button.mod-cta:hover {
   box-shadow: none;
 }
 
+/* In Live Preview, Obsidian splits a hashtag into two spans
+   (.cm-hashtag-begin "#" + .cm-hashtag-end "name"). Styled naively, each half
+   gets full padding + pill rounding and the tag looks broken in two. Join them
+   into one pill: round/pad only the outer edges, butt the inner edges together,
+   and drop the seam border so "#name" reads as a single token. */
+.cm-s-obsidian span.cm-hashtag {
+  border-left-width: 0;
+  border-right-width: 0;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cm-s-obsidian span.cm-hashtag.cm-hashtag-begin {
+  border-left-width: 1px;
+  border-top-left-radius: var(--cl-radius-pill);
+  border-bottom-left-radius: var(--cl-radius-pill);
+  padding-left: 0.52em;
+}
+
+.cm-s-obsidian span.cm-hashtag.cm-hashtag-end {
+  border-right-width: 1px;
+  border-top-right-radius: var(--cl-radius-pill);
+  border-bottom-right-radius: var(--cl-radius-pill);
+  padding-right: 0.52em;
+}
+
 .tag:hover,
 .cm-s-obsidian span.cm-hashtag:hover {
   background: var(--background-modifier-hover);
