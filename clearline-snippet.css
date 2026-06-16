@@ -80,9 +80,9 @@ Quick knobs:
   --text-accent-hover: var(--cl-accent-strong);
 
   --link-color: #8B6CEF;
-  --link-color-hover: #8B6CEF;
+  --link-color-hover: #6f4fd6;
   --link-external-color: #8B6CEF;
-  --link-external-color-hover: #8B6CEF;
+  --link-external-color-hover: #6f4fd6;
 
   --titlebar-background: var(--cl-surface-1);
   --titlebar-background-focused: var(--cl-surface-1);
@@ -181,9 +181,9 @@ Quick knobs:
   --text-accent-hover: var(--cl-accent-strong);
 
   --link-color: #8B6CEF;
-  --link-color-hover: #8B6CEF;
+  --link-color-hover: #6f4fd6;
   --link-external-color: #8B6CEF;
-  --link-external-color-hover: #8B6CEF;
+  --link-external-color-hover: #6f4fd6;
 
   --titlebar-background: var(--cl-surface-1);
   --titlebar-background-focused: var(--cl-surface-1);
@@ -466,6 +466,12 @@ button.mod-cta:hover {
   font-weight: 680;
 }
 
+/* Breathing room under headings so the following list/paragraph doesn't crowd
+   the title — improves scan-ability of "heading -> its content" groups. */
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: 0.6em;
+}
+
 .markdown-rendered h1,
 .cm-header-1 {
   font-size: var(--h1-size);
@@ -516,6 +522,7 @@ button.mod-cta:hover {
   background-color: var(--text-faint);
   width: 5px;
   height: 5px;
+  opacity: 0.9;
 }
 
 .cm-fold-indicator,
@@ -525,23 +532,24 @@ button.mod-cta:hover {
 
 .cm-s-obsidian .cm-line.HyperMD-list-line,
 .markdown-rendered li {
-  padding-top: 0.05em;
-  padding-bottom: 0.05em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
-/* Slightly airier gap between bullets and the first character */
+/* Roomier gap between the bullet and the first character, matching Tana's
+   outliner spacing where the text sits a little away from the bullet. */
 .markdown-rendered ul,
 .markdown-rendered ol {
   padding-inline-start: 1.6em;
 }
 
 .markdown-rendered li {
-  padding-inline-start: 0.18em;
+  padding-inline-start: 0.4em;
 }
 
 .cm-s-obsidian span.cm-formatting-list-ul,
 .cm-s-obsidian span.cm-formatting-list-ol {
-  padding-right: 0.24em;
+  padding-right: 0.5em;
 }
 
 /* Links and tags */
@@ -552,17 +560,20 @@ button.mod-cta:hover {
 .cm-url {
   color: var(--link-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 120ms ease, color 120ms ease;
+  border-bottom: none;
+  transition: color 120ms ease;
 }
 
+/* Hover: no underline — just a subtle color-tone shift, like the default
+   theme. (Obsidian adds text-decoration:underline on hover; suppress it.) */
 .markdown-rendered a.internal-link:hover,
 .markdown-rendered a.external-link:hover,
 .cm-hmd-internal-link:hover,
 .cm-link:hover,
 .cm-url:hover {
   color: var(--link-color-hover);
-  border-bottom-color: currentColor;
+  text-decoration: none;
+  border-bottom: none;
 }
 
 .tag,
@@ -822,6 +833,43 @@ input.metadata-property-key-input:focus-visible {
   color: var(--text-muted);
   font-weight: 600;
   letter-spacing: 0.01em;
+}
+
+/* Dataview tables — align with the theme's borderless grid. Dataview ships its
+   own .table-view-table styles (oversized header via font-size:larger, a heavy
+   solid header underline, no row dividers); these rules quiet it to match plain
+   tables. Selectors are scoped with .table-view-table to win on specificity. */
+.table-view-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-view-table > thead > tr,
+.table-view-table > tbody > tr {
+  margin: 0;
+}
+
+.table-view-table > thead > tr > th {
+  padding: 10px 12px;
+  background: var(--table-header-background);
+  color: var(--text-muted);
+  font-size: inherit;           /* kill Dataview's font-size: larger */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: left;
+  border: none;
+  border-top: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.table-view-table > tbody > tr > td {
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.table-view-table > tbody > tr:hover {
+  background: transparent;       /* drop Dataview's row-hover tint */
 }
 
 /* Callouts and quotes */
