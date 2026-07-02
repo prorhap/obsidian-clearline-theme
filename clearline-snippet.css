@@ -50,6 +50,7 @@ Quick knobs:
   --cl-code-bg: #f3f6fb;
   --cl-code-block: #f6f8fc;
   --cl-code-inline-fg: #c2546b;
+  --cl-code-accent: rgba(194, 84, 107, 0.55);
   --cl-highlight: #fff2b8;
   --cl-shadow: 0 10px 30px rgba(26, 39, 68, 0.07);
   --cl-selection: rgba(77, 127, 243, 0.16);
@@ -151,6 +152,7 @@ Quick knobs:
   --cl-code-bg: #111827;
   --cl-code-block: #0f1624;
   --cl-code-inline-fg: #e9919f;
+  --cl-code-accent: rgba(233, 145, 159, 0.50);
   --cl-highlight: rgba(255, 216, 101, 0.20);
   --cl-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
   --cl-selection: rgba(120, 160, 255, 0.20);
@@ -924,8 +926,44 @@ blockquote {
   border-radius: var(--cl-radius);
 }
 
+/* In Live Preview each code line is its own .HyperMD-codeblock element, so a
+   blanket radius scallops every line's left/right edge. Round only the first
+   and last lines so the block reads as one panel. */
+.cm-s-obsidian .HyperMD-codeblock {
+  border-radius: 0;
+}
+
+.cm-s-obsidian .HyperMD-codeblock-begin {
+  border-top-left-radius: var(--cl-radius);
+  border-top-right-radius: var(--cl-radius);
+}
+
+.cm-s-obsidian .HyperMD-codeblock-end {
+  border-bottom-left-radius: var(--cl-radius);
+  border-bottom-right-radius: var(--cl-radius);
+}
+
+/* When a fenced block is nested in a list, the list's .cm-indent spans still
+   draw their guide lines straight through the code panel. Hide those guides on
+   code-block lines so the panel stays clean. */
+.cm-s-obsidian .HyperMD-codeblock .cm-indent::before,
+.cm-s-obsidian .HyperMD-codeblock .cm-hmd-list-indent::before {
+  border-inline-end: none;
+}
+
+/* A soft accent bar down the left edge marks the panel as one block (and, when
+   nested, signals it belongs to the list). Drawn on the background layer, which
+   Obsidian already renders with left/right borders, so it stays put at any
+   nesting depth instead of fighting the edge-to-edge panel. */
+.cm-s-obsidian div.HyperMD-codeblock-bg,
+.cm-s-obsidian div.HyperMD-codeblock-begin-bg,
+.cm-s-obsidian div.HyperMD-codeblock-end-bg {
+  border-left: 2px solid var(--cl-code-accent);
+}
+
 .markdown-rendered pre {
   border: 1px solid var(--background-modifier-border);
+  border-left: 2px solid var(--cl-code-accent);
   padding: 0.95rem 1rem;
 }
 
