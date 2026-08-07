@@ -549,9 +549,16 @@ button.mod-cta:hover {
   padding-inline-start: 0.4em;
 }
 
+/* In Live Preview the gap must come from word-spacing, not padding-right. To
+   align wrapped lines under the first character, Obsidian measures the marker
+   prefix ("- ") and sets text-indent/padding-inline-start from that width — but
+   it measures to the right edge of the prefix's last character, so trailing
+   padding falls outside the measurement. Padding would push the first line over
+   while wrapped lines stayed put (a ~0.5em stagger). Widening the space glyph
+   itself keeps the gap inside what gets measured. */
 .cm-s-obsidian span.cm-formatting-list-ul,
 .cm-s-obsidian span.cm-formatting-list-ol {
-  padding-right: 0.5em;
+  word-spacing: 0.5em;
 }
 
 /* Links and tags */
